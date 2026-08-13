@@ -7,9 +7,13 @@
  */
 
 // Fallback average speed assumptions (m/s) used when GPS speed is
-// unavailable or unreliable. Tuned for Dar es Salaam urban travel.
-const FALLBACK_WALKING_SPEED_MPS = 1.3; // ~4.7 km/h
-const FALLBACK_DRIVING_SPEED_MPS = 8.3; // ~30 km/h (city traffic)
+// unavailable or unreliable.
+export const FALLBACK_WALKING_SPEED_MPS = 1.3; // ~4.7 km/h
+export const FALLBACK_DRIVING_SPEED_MPS = 8.3; // ~30 km/h (city traffic)
+
+// Additional preset speeds for explicit estimates in the UI.
+export const SLOW_DRIVING_SPEED_MPS = 5.0; // ~18 km/h (very slow)
+export const AVG_DRIVING_SPEED_MPS = 13.9; // ~50 km/h (average open-road)
 
 // GPS-reported speed below this is treated as "stationary/noise" rather
 // than a real moving speed, to avoid using tiny jitter values.
@@ -47,6 +51,20 @@ function guessFallbackSpeed(lastKnownSmoothedSpeedMps) {
     return FALLBACK_DRIVING_SPEED_MPS;
   }
   return FALLBACK_WALKING_SPEED_MPS;
+}
+
+/** Calculate ETA using an explicit fixed speed (m/s). Returns same shape as calculateETA. */
+export function calculateETAForSpeed(remainingMeters, speedMps) {
+  if (remainingMeters == null || Number.isNaN(remainingMeters) || remainingMeters < 0) {
+    return { seconds: null, label: '—', speedUsedMps: 0, isEstimate: true };
+  }
+
+  if (remainingMeters < 15) {
+    return { seconds: 0, label: 'Arriving', speedUsedMps: speedMps || 0, isEstimate: false };
+  }
+
+  const seconds = remainingMeters / speedMps;
+  return { seconds, label: formatDuration(seconds), speedUsedMps: speedMps, isEstimate: true };
 }
 
 /**

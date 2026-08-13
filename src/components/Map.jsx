@@ -82,7 +82,7 @@ export default function Map({ userPosition, destination, routePoints, checkpoint
       {routePoints && routePoints.length > 1 && (
         <Polyline
           positions={routePoints.map((p) => [p.latitude, p.longitude])}
-          pathOptions={{ color: '#f5b400', weight: 5, opacity: 0.85 }}
+          pathOptions={{ color: '#007bff', weight: 5, opacity: 0.95 }}
         />
       )}
 

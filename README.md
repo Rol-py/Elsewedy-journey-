@@ -133,3 +133,13 @@ glancing at while walking or driving.
   policy suited to expected traffic (e.g. MapTiler, Stadia Maps).
 - Route deviation tolerance and destination arrival/approach radii are
   each tunable in `src/data/destination.js` and `src/data/route.js`.
+
+## Deploying to Netlify (continuous deploy from GitHub)
+
+1. Commit and push your changes to the GitHub repository.
+2. In Netlify, click "New site from Git" and connect your GitHub account.
+3. Select the `Rol-py/Elsewedy-journey-` repository and pick the branch to deploy.
+4. Set the build command to `npm run build` and the publish directory to `dist`.
+5. Enable automatic deploys (Netlify does this by default) so every push keeps the live site updated.
+
+Note: Add your logo file to `public/elsewedy-logo.png` (the app references `/elsewedy-logo.png`). If you want a PNG and an SVG, add both and update `index.html` accordingly.

@@ -577,3 +577,34 @@ a.leaflet-control-attribution {
     padding: 10px;
   }
 }
+
+/* Splash screen */
+.splash-screen {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, rgba(10,14,13,0.95), rgba(26,35,37,0.95));
+  z-index: 1200;
+}
+.splash-screen__logo {
+  width: min(240px, 60%);
+  height: auto;
+  filter: drop-shadow(0 6px 18px rgba(0,0,0,0.6));
+}
+
+.journey-info__extra {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.journey-info__extra-row {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+

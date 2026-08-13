@@ -18,6 +18,7 @@ import NavigationStatus from './components/NavigationStatus.jsx';
 import JourneyInfo from './components/JourneyInfo.jsx';
 import CheckpointCard from './components/CheckpointCard.jsx';
 import ArrivalScreen from './components/ArrivalScreen.jsx';
+import Splash from './components/Splash.jsx';
 
 const speedTracker = createSpeedTracker();
 
@@ -39,6 +40,7 @@ export default function App() {
   const [justReachedMessage, setJustReachedMessage] = useState(null);
   const [arrived, setArrived] = useState(false);
   const [arrivalDismissed, setArrivalDismissed] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
 
   const stopWatchRef = useRef(null);
   const routeRequestedRef = useRef(false);
@@ -85,6 +87,13 @@ export default function App() {
       if (stopWatchRef.current) stopWatchRef.current();
     };
   }, [handlePosition, handleGpsError]);
+
+  // hide splash after short delay or on first location fix
+  useEffect(() => {
+    const t = setTimeout(() => setShowSplash(false), 1400);
+    if (position) setShowSplash(false);
+    return () => clearTimeout(t);
+  }, [position]);
 
   // Step 2: once we have a first fix, resolve the route (predefined -> auto -> straight line).
   useEffect(() => {
@@ -169,6 +178,7 @@ export default function App() {
 
   return (
     <div className="app-shell">
+      {showSplash && <Splash />}
       {showArrivalScreen && (
         <ArrivalScreen destination={ELSEWEDY_ELECTRIC} onDismiss={() => setArrivalDismissed(true)} />
       )}
