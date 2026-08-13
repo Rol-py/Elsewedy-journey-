@@ -1,0 +1,21 @@
+export const NAV_STATE = Object.freeze({
+  INITIALIZING: 'INITIALIZING',
+  LOCATION_REQUESTED: 'LOCATION_REQUESTED',
+  LOCATED: 'LOCATED',
+  NAVIGATING: 'NAVIGATING',
+  CHECKPOINT_REACHED: 'CHECKPOINT_REACHED',
+  APPROACHING_DESTINATION: 'APPROACHING_DESTINATION',
+  ARRIVED: 'ARRIVED',
+  GPS_ERROR: 'GPS_ERROR'
+});
+
+export const NAV_STATE_LABEL = {
+  [NAV_STATE.INITIALIZING]: 'Starting up…',
+  [NAV_STATE.LOCATION_REQUESTED]: 'Requesting location access…',
+  [NAV_STATE.LOCATED]: 'Location found — building route…',
+  [NAV_STATE.NAVIGATING]: 'Navigating',
+  [NAV_STATE.CHECKPOINT_REACHED]: 'Checkpoint reached',
+  [NAV_STATE.APPROACHING_DESTINATION]: 'Approaching destination',
+  [NAV_STATE.ARRIVED]: 'Arrived',
+  [NAV_STATE.GPS_ERROR]: 'Location problem'
+};
